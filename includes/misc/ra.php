@@ -28,4 +28,3 @@ function sendRA($command,$ra_user,$ra_pass,$server,$realm_port)
         return $error_str;
 		#die('Connection problems...Aborting | Error: '.$error_str);
 }
-?>

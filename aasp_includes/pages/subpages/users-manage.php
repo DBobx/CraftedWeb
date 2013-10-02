@@ -8,7 +8,20 @@
  */
 ?>
 <?php $page = new page; $server = new server; $account = new account; ?>
-<div class="box_right_title"><?php echo $page->titleLink(); ?> &raquo; Manage Users</div>
+<!-- Breadcrumb -->
+<div class="three-fourths breadcrumb">
+    <span><a href="index.php">Home</a></span>
+    <span class="middle"></span>
+    <span><a href="?p=users">Users</a></span>
+    <span class="middle"></span>
+    <span><a href="?p=users&s=manage">Manage Users</a></span>
+    <span class="end"></span>
+</div>
+<!-- /Breadcrumb -->
+<div class="two-thirds">
+    <div class="box">
+        <div class="inner">
+            <div class="titlebar">Manage Users</div>
 
 <?php
 if(isset($_GET['char']))  {
@@ -134,13 +147,16 @@ elseif(isset($_GET['editaccount'])) {
  elseif(isset($_GET['getslogs'])) {
 	?>
 	Account selected: <a href='?p=users&s=manage&user=<?php echo $_GET['getslogs']; ?>'><?php echo $account->getAccName($_GET['getslogs']); ?></a><p />
-	<table>
+	<table class="data-table">
+        <thead>
     	<tr>
         	<th>Service</th>
             <th>Description</th>
             <th>Realm</th>
             <th>Date</th>
         </tr>
+        </thead>
+        <tbody>
         <?php
 		$server->selectDB('webdb');
 		$result = mysql_query("SELECT * FROM user_log WHERE account='".(int)$_GET['getslogs']."'");
@@ -159,25 +175,32 @@ elseif(isset($_GET['editaccount'])) {
 			}
 		}
 		?>
+        </tbody>
     </table>
     <hr/>
 <?php
 }
 ?>
-<table width="100%">
-  			<tr>
-            	<td>Username or ID: </td>	
-                <form action="" method="get">
-                <input type="hidden" name="p" value="users">
-                <input type="hidden" name="s" value="manage">
-                <td><input type="text" name="user"></td><td><input type="submit" value="Go"></td>
-            </tr></form>
-            
-            <tr>
-                <td>Character name or GUID: </td>	
-                <form action="" method="get">
-                <input type="hidden" name="p" value="users">
-                <input type="hidden" name="s" value="manage">
-                <td><input type="text" name="char"></td><td><input type="submit" value="Go"></td>
-           </tr></form>
-</table>
+            <table class="center">
+                        <tr>
+                            <th>Username or ID: </th>
+                            <form action="" method="get" id="getuser">
+                            <input type="hidden" name="p" value="users">
+                            <input type="hidden" name="s" value="manage">
+                            <td><input type="text" name="user"></td>
+                            <td><a href="javascript:;" onclick="document.getElementById('getuser').submit();" class="button blue medium"> Go</a></td>
+                        </tr>
+                        </form>
+
+                        <tr>
+                            <th>Character name or GUID: </th>
+                            <form action="" method="get" id="getchar">
+                            <input type="hidden" name="p" value="users">
+                            <input type="hidden" name="s" value="manage">
+                            <td><input type="text" name="char"></td>
+                            <td><a href="javascript:;" onclick="document.getElementById('getchar').submit();" class="button blue medium"> Go</a></td>
+                       </tr></form>
+            </table>
+        </div>
+    </div>
+</div>

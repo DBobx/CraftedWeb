@@ -15,7 +15,6 @@ document.onkeydown = function(event)
 		}
 }
 
-
 function showLoader() {
 	centerLoader();
 	$("#overlay").fadeIn("fast");

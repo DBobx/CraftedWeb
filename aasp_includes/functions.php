@@ -314,7 +314,7 @@ class server
 		else
 			$rid = $_COOKIE['presetRealmStatus'];
 		
-		echo 'Selected realm: <b>'.$this->getRealmName($rid).'</b> <a href="#" onclick="changePresetRealmStatus()">(Change Realm)</a><hr/>';
+		echo '&nbsp;&nbsp;Selected realm: <b>'.$this->getRealmName($rid).'</b> <a href="#" onclick="changePresetRealmStatus()">(Change Realm)</a><hr/>';
 		 ?>
         <table>
                <tr valign="top">
@@ -333,7 +333,7 @@ class server
                </tr>
             </table>
             <hr/>
-            <b>General Status:</b><br/>
+            <b>&nbsp;&nbsp;General Status:</b><br/>
             <table>
                <tr valign="top">
                    <td width="70%">

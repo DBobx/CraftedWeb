@@ -23,21 +23,40 @@
 		 
 		 //Note: The round() function will return 0 if no value is set :)
 ?>
-<div class="box_right_title">Shop Overview</div>
-<table style="width: 100%;">
+ <!-- Breadcrumb -->
+ <div class="three-fourths breadcrumb">
+     <span><a href="index.php">Home</a></span>
+     <span class="middle"></span>
+     <span><a href="?p=shop">Shop Overview</a></span>
+     <span class="end"></span>
+ </div>
+ <!-- /Breadcrumb -->
+         <div class="clear"></div>
+ <div class="one-fourth">
+ <div class="box">
+ <div class="inner">
+ <div class="titlebar">Shop Overview</div>
+<table>
 <tr>
-<td><span class='blue_text'>Items in shop</span></td><td><?php echo round(mysql_result($inShop,0));?></td>
+<td>Items in Shop</td><td><?php echo round(mysql_result($inShop,0));?></td>
 </tr>
 <tr>
-    <td><span class='blue_text'>Purchases today</span></td><td><?php echo round(mysql_result($purchToday,0)); ?></td>
-    <td><span class='blue_text'>Total purchases</span></td><td><?php echo round(mysql_result($totalPurch,0)); ?></td>
+    <td>Purchases Today</td><td><?php echo round(mysql_result($purchToday,0)); ?></td>
+    </tr>
+    <tr>
+    <td>Total Purchases</td><td><?php echo round(mysql_result($totalPurch,0)); ?></td>
 </tr>
 <tr>
-    <td><span class='blue_text'>Average item cost</span></td><td><?php echo round(mysql_result($getAvg,0)); ?></td>
+    <td>Avg. Item Cost</td><td><?php echo round(mysql_result($getAvg,0)); ?></td>
 </tr>
 </table>
 <hr/>
-<a href="?p=shop&s=add" class="content_hider">Add Items</a>
-<a href="?p=shop&s=manage" class="content_hider">Manage Items</a>
-<a href="?p=shop&s=tools" class="content_hider">Tools</a>
+             <center>
+<a href="?p=shop&s=add" class="button blue medium">Add Items</a>&nbsp;
+<a href="?p=shop&s=manage" class="button blue medium">Manage Items</a>&nbsp;
+<a href="?p=shop&s=tools" class="button blue medium">Tools</a>
+                 </center>
+         </div>
+         </div>
+         </div>
 <?php } ?>

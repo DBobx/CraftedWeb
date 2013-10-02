@@ -1,12 +1,3 @@
-/*
-CraftedWeb Base SQL Dump
-
-Exported with:
-	SQLyog Ultimate v8.8 
-	MySQL - 5.0.77 : Database - CraftedWeb
-*********************************************************************
-*/
-
 CREATE TABLE IF NOT EXISTS `account_data` (
   `id` int(32) NOT NULL auto_increment,
   `vp` int(32) default '0',
@@ -78,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 
-insert  into `news`(`id`,`title`,`body`,`author`,`image`,`date`) values (1,'Welcome to Your New Website!','If you\'re seing this message, most likely, the CraftedWeb database has been installed successfully. \n\nNow, check out your configuration file to customize your website even further if you havent done that already. You may edit this news post by logging onto your Admin panel. \n\nWe sincerely hope that you will enjoy our work. Thanks!','CraftedDev','','2012-01-30 22:40:07');
+insert  into `news`(`id`,`title`,`body`,`author`,`image`,`date`) values (1,'Welcome to Your New Website!','If you\'re seing this message, most likely, the CraftedWeb database has been installed successfully. \n\nNow, check out your configuration file to customize your website even further if you havent done that already. You may edit this news post by logging onto your Admin panel. \n\nWe sincerely hope that you will enjoy our work. Thanks!','EmuDevs','','2013-09-25 22:40:07');
 
 
 CREATE TABLE IF NOT EXISTS `news_comments` (

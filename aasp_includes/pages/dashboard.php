@@ -7,43 +7,72 @@
      Copyright (C) 2013 EmuDevs <http://www.emudevs.com/>
  */
 ?>
-<div class="box_right_title">Dashboard</div>
-<table style="width: 605px;">
-<tr>
-<td><span class='blue_text'>Active Connections</span></td><td><?php echo $server->getActiveConnections(); ?></td>
-<td><span class='blue_text'>Active accounts(This month)</span></td><td><?php echo $server->getActiveAccounts(); ?></td>
-</tr>
-<tr>
-     <td><span class='blue_text'>Account logged in today</span></td><td><?php echo $server->getAccountsLoggedToday(); ?></td> 
-    <td><span class='blue_text'>Accounts created today</span></td><td><?php echo $server->getAccountsCreatedToday(); ?></td>
-</tr>
-</table>
+<!-- Breadcrumb -->
+<div class="three-fourths breadcrumb">
+    <span><a href="index.php">Home</a></span>
+    <span class="middle"></span>
+    <span><a href="?p=dashboard">Dashboard</a></span>
+    <span class="end"></span>
 </div>
-
+<!-- /Breadcrumb -->
+<section class="two-sixths">
+    <div class="box">
+        <div class="inner">
+        <div class="titlebar">Dashboard</div>
+        <table>
+            <tr><td><span class='fleft'>Account logged in today: </span></td><td><?php echo $server->getAccountsLoggedToday(); ?></td></tr>
+            <tr><td><span class='fleft'>Web Database: </span></td><td><?php echo $GLOBALS['connection']['webdb']; ?></td></tr>
+            <tr><td><span class='fleft'>Logon Database: </span></td><td><?php echo $GLOBALS['connection']['logondb']; ?></td></tr>
+            <tr><td><span class='fleft'>World Database: </span></td><td><?php echo $GLOBALS['connection']['worlddb']; ?></td></tr>
+            <tr><td><span class='fleft'>MySQL Host: </span></td><td><?php echo $GLOBALS['connection']['host'];?></td></tr>
+        </table>
+        </div>
+    </div>
+</section>
 <?php
 $server->checkForNotifications();
 ?>
-
-<div class="box_right">
-        <div class="box_right_title">Admin Panel log</div>
-        <?php
-                    $server->selectDB('webdb');
-                    $result = mysql_query("SELECT * FROM admin_log ORDER BY id DESC LIMIT 10");
-                    if(mysql_num_rows($result)==0) {
-                        echo "The admin log was empty!";
-                    } else { ?>
-        <table class="center">
-               <tr><th>Date</th><th>User</th><th>Action</th></tr>
-                    <?php
-                    while($row = mysql_fetch_assoc($result)) { ?>
-                        <tr>
-                            <td><?php echo date("Y-m-d H:i:s",$row['timestamp']); ?></td>
-                            <td><?php echo $account->getAccName($row['account']); ?></td>
-                            <td><?php echo $row['action']; ?></td>
-                        </tr>
-                    <?php }
-               ?>
-        </table><br/>
-        <a href="?p=logs&s=admin" title="Get more logs">Older logs...</a>
-        <?php } ?>
-</div>
+<?php if(isset($_SESSION['cw_admin']))  { ?>
+    <section class="two-sixths">
+        <div class="box">
+            <div class="inner">
+                <div class="titlebar">Server Status</div>
+            <?php $server->serverStatus(); ?>
+            </div>
+        </div>
+    </section>
+<?php } ?>
+<section class="two-thirds">
+    <div class="box">
+        <div class="inner">
+            <div class="titlebar">Admin Log</div>
+            <?php
+                $server->selectDB('webdb');
+                $result = mysql_query("SELECT * FROM admin_log ORDER BY id DESC LIMIT 10");
+                if(mysql_num_rows($result)==0) {
+                    echo "The admin log was empty!";
+                } else { ?>
+                <table class="data-table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>User</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while($row = mysql_fetch_assoc($result)) { ?>
+                            <tr>
+                                <td class="center"><?php echo date("Y-m-d H:i:s",$row['timestamp']); ?></td>
+                                <td class="center"><?php echo $account->getAccName($row['account']); ?></td>
+                                <td class="center"><?php echo $row['action']; ?></td>
+                            </tr>
+                        <?php }?>
+                    </tbody>
+                </table>
+            <a href="?p=logs&s=admin" title="Get more logs">Older logs...</a>
+            <?php } ?>
+            </div>
+        </div>
+</section>

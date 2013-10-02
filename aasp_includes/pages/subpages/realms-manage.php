@@ -8,26 +8,52 @@
  */
 ?>
 <?php $page = new page; $server = new server;?>
-<div class="box_right_title">Manage Realms</div>
-<table class="center">
-<tr><th>ID</th><th>Name</th><th>Host</th><th>Port</th><th>Character DB</th><th>Actions</th></tr>
-<?php
-    $server->selectDB('webdb');
-	$result = mysql_query("SELECT * FROM realms ORDER BY id DESC");
-	while($row = mysql_fetch_assoc($result)) { ?>
-		  <tr>
-              <td><?php echo $row['id']; ?></td>
-              <td><?php echo $row['name']; ?></td>
-              <td><?php echo $row['host']; ?></td>
-              <td><?php echo $row['port']; ?></td>
-              <td><?php echo $row['char_db']; ?></td>
-              <td><a href="#" onclick="edit_realm(<?php echo $row['id']; ?>,'<?php echo $row['name']; ?>','<?php echo $row['host']; ?>',
-              '<?php echo $row['port']; ?>','<?php echo $row['char_db']; ?>')">Edit</a> &nbsp; 
-              <a href="#" onclick="delete_realm(<?php echo $row['id']; ?>,'<?php echo $row['name']; ?>')">Delete</a><br/>
-              <a href="#" onclick="edit_console(<?php echo $row['id']; ?>,'<?php echo $row['sendType']; ?>','<?php echo $row['rank_user']; ?>',
-			  '<?php echo $row['rank_pass']; ?>')">Edit Console settings</a>
-              </td>
-          </tr>
-	<?php }
-?>
-</table>
+<!-- Breadcrumb -->
+<div class="three-fourths breadcrumb">
+    <span><a href="index.php">Home</a></span>
+    <span class="middle"></span>
+    <span><a href="?p=realms">Realms</a></span>
+    <span class="middle"></span>
+    <span><a href="?p=realms">Manage Realms</a></span>
+    <span class="end"></span>
+</div>
+<!-- /Breadcrumb -->
+<div class="full-width">
+    <div class="box">
+        <div class="inner">
+        <div class="titlebar">Manage Realm</div>
+            <table class="data-table">
+                <thead>
+                    <tr><th>ID</th>
+                        <th>Name</th>
+                        <th>Host</th>
+                        <th>Port</th>
+                        <th>Character DB</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        $server->selectDB('webdb');
+                        $result = mysql_query("SELECT * FROM realms ORDER BY id DESC");
+                        while($row = mysql_fetch_assoc($result)) { ?>
+                              <tr class="center">
+                                  <td><?php echo $row['id']; ?></td>
+                                  <td><?php echo $row['name']; ?></td>
+                                  <td><?php echo $row['host']; ?></td>
+                                  <td><?php echo $row['port']; ?></td>
+                                  <td><?php echo $row['char_db']; ?></td>
+                                  <td><a href="#" onclick="edit_realm(<?php echo $row['id']; ?>,'<?php echo $row['name']; ?>','<?php echo $row['host']; ?>',
+                                  '<?php echo $row['port']; ?>','<?php echo $row['char_db']; ?>')" class="button green tiny"><span class="icon entypo write"></span> Edit</a> &nbsp;
+                                  <a href="#" onclick="delete_realm(<?php echo $row['id']; ?>,'<?php echo $row['name']; ?>')" class="button red tiny">
+                                  <span class="icon entypo minus"></span> Delete</a><br/>
+                                  <a href="#" onclick="edit_console(<?php echo $row['id']; ?>,'<?php echo $row['sendType']; ?>','<?php echo $row['rank_user']; ?>',
+                                  '<?php echo $row['rank_pass']; ?>')" class="button blue tiny"><span class="icon entypo write"></span> Edit Console settings</a>
+                                  </td>
+                              </tr>
+                    <?php }?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
